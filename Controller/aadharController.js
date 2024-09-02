@@ -1,4 +1,3 @@
-// aadharController.js
 
 const request = require('request');
 
@@ -12,7 +11,7 @@ exports.validateAadhar = (req, res) => {
     method: 'POST',
     url: 'https://api.apyhub.com/validate/aadhaar',
     headers: {
-      'apy-token': 'APY0dTvPkg5mo5QqOXvtzTQTXddEfBUebPmJ1Ce0GT6Zbi5um7MjlV2CYACVR2p2SZ', // Replace with your actual API token
+      'apy-token': process.env.aadhar_key, 
       'Content-Type': 'application/json'
     },
     body: { aadhaar },

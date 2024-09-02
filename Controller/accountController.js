@@ -15,7 +15,7 @@ exports.verifyBankAccount = async(req, res) => {
             port: null,
             path: '/v3/tasks/async/verify_with_source/validate_bank_account',
             headers: {
-                'x-rapidapi-key': '8f4fc40af9msh3d452ca6189bf2ep13bf1fjsn4472b50b5f79', // Use your own key here
+                'x-rapidapi-key': '8f4fc40af9msh3d452ca6189bf2ep13bf1fjsn4472b50b5f79',
                 'x-rapidapi-host': 'indian-bank-account-verification.p.rapidapi.com',
                 'Content-Type': 'application/json'
             }
@@ -31,7 +31,7 @@ exports.verifyBankAccount = async(req, res) => {
             apiRes.on('end',async function () {
                 const body = Buffer.concat(chunks);
                 const response = JSON.parse(body.toString());
-                // Send the API response back to the client
+                // Send the API response back 
                 res.json(response);
             });
         });
@@ -43,8 +43,8 @@ exports.verifyBankAccount = async(req, res) => {
     
         // Send the request body data to the external API
         apiReq.write(JSON.stringify({
-            task_id: '123', // Replace with actual task ID if needed
-            group_id: '1234', // Replace with actual group ID if needed
+            task_id: '123', 
+            group_id: '1234', 
             data: {
                 bank_account_no,
                 bank_ifsc_code
@@ -67,7 +67,7 @@ exports.verifyBankAccountStatus = (req, res) => {
         method: 'GET',
         hostname: 'indian-bank-account-verification.p.rapidapi.com',
         port: null,
-        path: `/v3/tasks?request_id=${requestId}`, // Use the request ID in the path
+        path: `/v3/tasks?request_id=${requestId}`, 
         headers: {
             'x-rapidapi-key': '8f4fc40af9msh3d452ca6189bf2ep13bf1fjsn4472b50b5f79',
             'x-rapidapi-host': 'indian-bank-account-verification.p.rapidapi.com'
@@ -84,7 +84,7 @@ exports.verifyBankAccountStatus = (req, res) => {
         apiRes.on('end', function () {
             const body = Buffer.concat(chunks);
             const response = JSON.parse(body.toString());
-            // Send the API response back to the client
+            // Send the API response back 
             res.json(response);
         });
     });

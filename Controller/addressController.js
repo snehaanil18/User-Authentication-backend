@@ -14,12 +14,12 @@ exports.getPincodeDetails = async (req, res) => {
                 method: 'GET',
                 hostname: 'india-pincode-with-latitude-and-longitude.p.rapidapi.com',
                 port: null,
-                path: `/api/v1/pincode/${pincode}`, // Use the dynamic pincode
+                path: `/api/v1/pincode/${pincode}`, 
                 headers: {
-                    'x-rapidapi-key': 'e140319af7msh2f0fbd7d73d443cp119272jsnd01a051ac171', // Replace with your API key
+                    'x-rapidapi-key': 'e140319af7msh2f0fbd7d73d443cp119272jsnd01a051ac171', 
                     'x-rapidapi-host': 'india-pincode-with-latitude-and-longitude.p.rapidapi.com'
                 },
-                timeout: 5000 // Set a timeout of 5 seconds
+                timeout: 5000 
             };
 
             const apiReq = https.request(options, function (apiRes) {
@@ -32,10 +32,10 @@ exports.getPincodeDetails = async (req, res) => {
 
                 apiRes.on('end', async function () {
                     try {
-                        // Check content type
+                        
                         if (apiRes.headers['content-type'] && apiRes.headers['content-type'].includes('application/json')) {
                             if (body) {
-                                // Attempt to parse the response body
+                                
                                 const response = JSON.parse(body);
 
                                 if (Array.isArray(response) && response.length === 0) {
@@ -47,11 +47,11 @@ exports.getPincodeDetails = async (req, res) => {
                                     res.json({ message: 'Pincode verified and updated successfully', response });
                                 }
                             } else {
-                                // Empty response body
+                                
                                 res.status(204).json({ message: 'No content returned from API' });
                             }
                         } else {
-                            // Unexpected content type
+                            
                             res.status(500).json({ message: 'Unexpected response format', response: body });
                         }
                     } catch (parseError) {
@@ -68,7 +68,7 @@ exports.getPincodeDetails = async (req, res) => {
 
             apiReq.on('timeout', () => {
                 console.error('Request timed out');
-                apiReq.abort(); // Abort the request
+                apiReq.abort(); 
                 res.status(504).json({ message: 'Request timed out' });
             });
 

@@ -75,7 +75,6 @@ exports.verifyOtp = async (req, res) => {
   // Verify the OTP and email
   if (req.session.otp === otp && req.session.email === email) {
     // OTP is correct and within the valid time
-    // res.send("OTP verified successfully!");
     await users.findOneAndUpdate({ email: email }, { email_verify: true });
     res.status(200).json({ message: "OTP verified successfully!" })
 

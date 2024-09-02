@@ -9,6 +9,7 @@ const otpGenerator = require('otp-generator')
 exports.register = async (req, res) => {
     const { name, email, phone, aadhar, dob, password } = req.body;
     try {
+        //Check if the email address is already registered
         const existingUser = await users.findOne({ email })
         if (existingUser) {
             res.status(406).json("User already exsists")

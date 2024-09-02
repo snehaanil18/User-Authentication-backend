@@ -3,7 +3,7 @@ const otpGenerator = require('otp-generator');
 const users = require('../Models/userSchema');
 
 // Using environment variables for sensitive data
-const accountSid = process.env.acct_sid;  // Make sure these are defined in your environment
+const accountSid = process.env.acct_sid; 
 const authToken = process.env.auth_token;
 
 // Initialize Twilio client
@@ -27,7 +27,8 @@ exports.verifyPhone = async (req, res) => {
       req.session.phone = phone;
       req.session.otpExpiry = otpExpiry;
   
-  
+
+      
       // Create and send SMS
       const messageResponse = await client.messages.create({
         body: `Your OTP for Account Verification is ${otp}`,  
@@ -49,6 +50,11 @@ exports.verifyPhone = async (req, res) => {
 
 exports.verifyOtp = async (req, res) => {
   const { phone, otp } = req.body;
+  // console.log(phone,otp);
+  // console.log('Inside verify');
+  
+  // console.log(req.session);
+  
 
   // Check if OTP, phone, and expiration time exist in the session
   if (!req.session.otp || !req.session.phone || !req.session.otpExpiry) {
